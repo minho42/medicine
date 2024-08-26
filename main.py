@@ -6,8 +6,8 @@ def run():
     cursor = conn.cursor()
     cursor.execute(
         '''CREATE TABLE IF NOT EXISTS medications
-        (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        name TEXT UNIQUE, 
+        (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+        name TEXT UNIQUE NOT NULL, 
         wiki TEXT)'''
         )
     with open('medication_list.txt', 'r') as file:
