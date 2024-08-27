@@ -13,8 +13,13 @@ def run():
     with open('medication_list.txt', 'r') as file:
         for line in file:
             name = line.strip()
-            wiki = wiki_summary(name)
-            print(f"{name}: {wiki[:20]}...")
+            # strip name after "(" or "," for wiki
+            # e.g.
+            # Aspirin (analgesic)	
+            # Lignocaine, see Lidocaine (anaesthesia)
+            name_for_wiki = name.split('(')[0].split(',')[0].strip()
+            wiki = wiki_summary(name_for_wiki)
+            print(f"{name_for_wiki}: {wiki[:20]}...")
             
             cursor.execute(
                 '''INSERT OR REPLACE INTO medications (name, wiki)
